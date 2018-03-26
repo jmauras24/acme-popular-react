@@ -13,7 +13,7 @@ const Nav = ({ users }) => {
       </li>
       <li>
         <Link to='/users'>
-         Users ({ users.length })
+         Users ({ users.users.length })
         </Link>
       </li>
     </ul>

@@ -6,14 +6,12 @@ import { updateRating } from '../store';
 class Users extends Component {
   constructor(props){
     super(props);
-
     this.onChangeRating = this.onChangeRating.bind(this);
   }
 
   onChangeRating(user, operator){
-    console.log('JJJJJJ',user, operator, user.rating, typeof(user.rating));
     const _user = {
-      rating: operator === 'sub' ? user.rating - 1 : user.rating + 1,
+      rating: user.rating + operator,
       id: user.id,
       name: user.name
     }
@@ -30,11 +28,11 @@ class Users extends Component {
         users.map(user => {
           return(
             <li key={ user.id }>
-              <button onClick={() => onChangeRating(user,'sub')}> - </button>
+              <button onClick={() => onChangeRating(user,-1)}> - </button>
               <Link to={ `/users/${user.id}` }>
               { user.name }  { user.rating }
               </Link>
-              <button onClick={() => onChangeRating(user,'add')}> + </button>
+              <button onClick={() => onChangeRating(user,1)}> + </button>
             </li>
           )
         })
@@ -47,7 +45,7 @@ class Users extends Component {
 const mapStateToProps = (state) => {
   console.log('map', state.users.users)
   return {
-    users: state.users.users // can't see why this is happening
+    users: state.users.users // can't see why users.users is happening
   }
 }
 

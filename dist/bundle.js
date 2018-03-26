@@ -21526,6 +21526,10 @@ var _Users = __webpack_require__(142);
 
 var _Users2 = _interopRequireDefault(_Users);
 
+var _User = __webpack_require__(143);
+
+var _User2 = _interopRequireDefault(_User);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21534,7 +21538,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import User from './User';
 // import UserCreate from './UserCreate';
 
 var App = function (_Component) {
@@ -21625,7 +21628,7 @@ var Nav = function Nav(_ref) {
         _reactRouterDom.Link,
         { to: '/users' },
         'Users (',
-        users.length,
+        users.users.length,
         ')'
       )
     )
@@ -27311,8 +27314,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -27348,9 +27349,8 @@ var Users = function (_Component) {
   _createClass(Users, [{
     key: 'onChangeRating',
     value: function onChangeRating(user, operator) {
-      console.log('JJJJJJ', user, operator, user.rating, _typeof(user.rating));
       var _user = {
-        rating: operator === 'sub' ? user.rating - 1 : user.rating + 1,
+        rating: user.rating + operator,
         id: user.id,
         name: user.name
       };
@@ -27373,7 +27373,7 @@ var Users = function (_Component) {
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
-                  return onChangeRating(user, 'sub');
+                  return onChangeRating(user, -1);
                 } },
               ' - '
             ),
@@ -27387,7 +27387,7 @@ var Users = function (_Component) {
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
-                  return onChangeRating(user, 'add');
+                  return onChangeRating(user, 1);
                 } },
               ' + '
             )
@@ -27403,7 +27403,7 @@ var Users = function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   console.log('map', state.users.users);
   return {
-    users: state.users.users // can't see why this is happening
+    users: state.users.users // can't see why users.users is happening
   };
 };
 
@@ -27416,6 +27416,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Users);
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);
